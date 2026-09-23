@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap');
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: 'Quicksand', sans-serif;
+  color: #5a3d4a;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse at top left, #fff6fb 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, #ffe9a8 0%, transparent 45%),
+    linear-gradient(165deg, #fff0f5 0%, #ffe8f0 42%, #fff8e7 100%);
+}
+
+.letter-page{
+  width: min(100%, 40rem);
+  margin: 0 auto;
+  padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1rem, 4vw, 1.5rem) 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.letter-card{
+  background: rgba(255, 252, 250, 0.88);
+  border: 1px solid rgba(232, 150, 170, 0.35);
+  border-radius: 1.5rem;
+  padding: clamp(1.35rem, 4.5vw, 2.25rem);
+  box-shadow: 0 18px 40px rgba(180, 100, 130, 0.12);
+  animation: riseIn 0.9s ease-out both;
+}
+
+.letter-card__date{
+  font-size: clamp(0.68rem, 2vw, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c47a90;
+  margin-bottom: 0.75rem;
+}
+
+.letter-card__hello{
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.2rem, 8vw, 3.2rem);
+  font-weight: 400;
+  color: #e85d8a;
+  line-height: 1.15;
+  margin-bottom: 1.1rem;
+}
+
+.letter-card__body{
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.letter-card__body p{
+  font-size: clamp(0.92rem, 2.6vw, 1.05rem);
+  line-height: 1.7;
+  font-weight: 500;
+  color: #6b4554;
+}
+
+.letter-card__body strong{
+  color: #c4476d;
+  font-weight: 700;
+}
+
+.letter-card__highlight{
+  margin-top: 0.25rem;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(245, 163, 184, 0.25), rgba(240, 194, 122, 0.28));
+  color: #8b3d57 !important;
+  font-weight: 600 !important;
+  text-align: center;
+}
+
+.letter-card__photo{
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.letter-card__photo img{
+  width: min(100%, 22rem);
+  max-height: 16rem;
+  object-fit: cover;
+  border-radius: 1rem;
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 24px rgba(180, 100, 130, 0.18);
+}
+
+.letter-card__photo figcaption{
+  margin-top: 0.55rem;
+  font-size: 0.82rem;
+  color: #b07a8a;
+  font-weight: 600;
+}
+
+/* Oculta el bloque de foto hasta que exista la imagen */
+.letter-card__photo.is-empty{
+  display: none;
+}
+
+.letter-card__sign{
+  margin-top: 1.5rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  color: #8b5568;
+  line-height: 1.55;
+}
+
+.letter-card__sign span{
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.8rem, 6vw, 2.4rem);
+  color: #e85d8a;
+}
+
+.letter-nav{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+}
+
+.letter-nav__btn{
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: clamp(0.82rem, 2.4vw, 0.92rem);
+  padding: 0.8rem 1.3rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f5a3b8 0%, #f0c27a 100%);
+  color: #5a2d3a;
+  box-shadow: 0 8px 22px rgba(232, 93, 138, 0.22);
+}
+
+.letter-nav__btn--soft{
+  background: rgba(255, 255, 255, 0.55);
+  color: #8b5568;
+  border: 1px solid rgba(196, 122, 144, 0.35);
+  box-shadow: none;
+}
+
+@keyframes riseIn{
+  from{
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 480px){
+  .letter-card{
+    border-radius: 1.15rem;
+  }
+}
