@@ -1,6 +1,6 @@
 (function () {
   // Cambia esta fecha por el día en que se vuelven a ver (YYYY-MM-DD)
-  var NEXT_HUG_DATE = "2026-09-26";
+  var NEXT_HUG_DATE = "2026-10-08";
 
   var daysEl = document.getElementById("cd-days");
   var hoursEl = document.getElementById("cd-hours");

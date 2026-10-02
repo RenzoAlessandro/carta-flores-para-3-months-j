@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/extra.css" />
+    <link rel="stylesheet" href="../css/juegos.css" />
+    <link rel="icon" href="../img/flowers.png" type="image/x-icon" />
+    <title>Tres en raya · Renzo &amp; Jimena</title>
+  </head>
+  <body>
+    <main class="page page--center game">
+      <header class="page-header">
+        <p class="eyebrow">Juegos</p>
+        <h1 class="page-title">Tres en raya</h1>
+        <p class="page-lead">Entre ustedes o contra la máquina. Tres en línea y ganas.</p>
+      </header>
+
+      <div class="setup" id="setup">
+        <p class="setup__label">¿Cómo juegas?</p>
+        <div class="setup__choices">
+          <button class="btn" type="button" data-mode="together">Entre nosotros</button>
+          <button class="btn btn--soft" type="button" data-mode="renzo">Contra la máquina, soy Renzo</button>
+          <button class="btn btn--soft" type="button" data-mode="jimena">Contra la máquina, soy Jimena</button>
+        </div>
+      </div>
+
+      <p class="game__status" id="game-status" aria-live="polite"></p>
+
+      <div class="game__legend">
+        <span class="game__who game__who--renzo">Renzo · X</span>
+        <span class="game__who game__who--jimena">Jimena · O</span>
+      </div>
+
+      <div class="xo" id="board"></div>
+
+      <nav class="nav-row">
+        <button class="btn" type="button" id="restart">Nueva partida</button>
+        <a class="btn btn--soft" href="juegos.html">Volver a juegos</a>
+      </nav>
+    </main>
+
+    <script src="../js/raya.js"></script>
+  </body>
+</html>

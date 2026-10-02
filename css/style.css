@@ -35,15 +35,27 @@ body{
 
 .greetings{
     font-family: 'Great Vibes', cursive;
-    font-size: 6.5rem;
+    font-size: clamp(2.7rem, 6.2vw, 4.6rem);
     font-weight: 400;
-    line-height: 1.1;
-    margin-bottom: 0.5rem;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.2em;
 }
 
 .greetings > span{
-    display: inline-block;
+    display: block;
     animation: glow 2.8s ease-in-out infinite;
+}
+
+.greetings__and{
+    font-size: 0.85em;
+    line-height: 1;
+    margin: 0;
 }
 
 @keyframes glow{
@@ -59,11 +71,8 @@ body{
     }
 }
 
-.greetings > span:nth-child(2){ animation-delay: .15s; }
-.greetings > span:nth-child(3){ animation-delay: .3s; }
-.greetings > span:nth-child(4){ animation-delay: .45s; }
-.greetings > span:nth-child(5){ animation-delay: .6s; }
-.greetings > span:nth-child(6){ animation-delay: .75s; }
+.greetings > span:nth-child(2){ animation-delay: .2s; }
+.greetings > span:nth-child(3){ animation-delay: .4s; }
 
 .description{
     font-size: 1.15rem;
@@ -121,9 +130,19 @@ body{
     line-height: 1.5;
 }
 
-@media screen and (max-width:574px){
+@media screen and (max-width:640px){
     .greetings{
-        font-size: 4.2rem;
+        flex-direction: column;
+        align-items: center;
+        font-size: 3.4rem;
+        line-height: 0.95;
+        gap: 0;
+    }
+
+    .greetings__and{
+        font-size: 0.55em;
+        line-height: 0.7;
+        margin: -0.05em 0;
     }
 
     .description{

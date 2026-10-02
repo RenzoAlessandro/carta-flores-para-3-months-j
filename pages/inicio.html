@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/extra.css" />
+    <link rel="icon" href="../img/flowers.png" type="image/x-icon" />
+    <title>Nuestro lugar · Renzo &amp; Jimena</title>
+  </head>
+  <body>
+    <main class="home">
+      <header class="home__header">
+        <p class="eyebrow">Renzo &amp; Jimena</p>
+        <h1 class="page-title page-title--script">Nuestro lugar</h1>
+        <p class="page-lead">
+          Elige lo que quieras ver. No hay un orden: todo esto es para ti, cuando tú quieras.
+        </p>
+      </header>
+
+      <section class="widgets" aria-label="Nosotros">
+        <figure class="widget widget--photo finale-photo">
+          <img src="../img/nosotros2.png" alt="Jimena y Renzo juntos" />
+          <figcaption>Nosotros · nuestro pedacito de eternidad</figcaption>
+        </figure>
+
+        <section class="widget hug-card" aria-label="Próximo abrazo">
+          <p class="hug-card__label">Nuestro próximo abrazo</p>
+          <p class="hug-card__sub">Falta poquito para volver a encontrarnos…</p>
+          <div class="hug-card__grid" id="countdown">
+            <div><strong id="cd-days">--</strong><span>días</span></div>
+            <div><strong id="cd-hours">--</strong><span>horas</span></div>
+            <div><strong id="cd-mins">--</strong><span>min</span></div>
+            <div><strong id="cd-secs">--</strong><span>seg</span></div>
+          </div>
+          <p class="hug-card__date" id="hug-date-label"></p>
+        </section>
+      </section>
+
+      <nav class="picks" aria-label="Elige una página">
+        <a class="pick" href="flower.html">
+          <span class="pick__kicker">Flores</span>
+          <span class="pick__title">Ver las flores amarillas</span>
+          <span class="pick__text">Las que planté en código, solo para ti.</span>
+        </a>
+        <a class="pick" href="carta.html">
+          <span class="pick__kicker">Carta</span>
+          <span class="pick__title">Ver la carta de los 3 meses</span>
+          <span class="pick__text">Lo que te escribí el 22 de septiembre.</span>
+        </a>
+        <a class="pick" href="historia.html">
+          <span class="pick__kicker">Recuerdos</span>
+          <span class="pick__title">Ver nuestra historia</span>
+          <span class="pick__text">Los momentos que nos hicieron nosotros.</span>
+        </a>
+        <a class="pick" href="codigo.html">
+          <span class="pick__kicker">Código</span>
+          <span class="pick__title">Ver el lado programador</span>
+          <span class="pick__text">Commits, terminal y mucho cariño.</span>
+        </a>
+        <a class="pick" href="quieres.html">
+          <span class="pick__kicker">Pregunta</span>
+          <span class="pick__title">Ver la preguntita</span>
+          <span class="pick__text">Una sola respuesta correcta. ♡</span>
+        </a>
+        <a class="pick" href="juegos.html">
+          <span class="pick__kicker">Juegos</span>
+          <span class="pick__title">Jugar juntos</span>
+          <span class="pick__text">Conecta 4 y tres en raya, en el mismo celular.</span>
+        </a>
+      </nav>
+    </main>
+
+    <script src="../js/countdown.js"></script>
+  </body>
+</html>
