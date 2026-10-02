@@ -62,41 +62,31 @@
     return spots;
   }
 
-  function scoreMove(depth, playerJustMoved) {
-    if (findWin(cpu)) return 10 - depth;
-    if (findWin(human)) return depth - 10;
-    var spots = emptySpots();
-    if (!spots.length) return 0;
+  function pickRandom(list) {
+    return list[Math.floor(Math.random() * list.length)];
+  }
 
-    var next = other(playerJustMoved);
-    var best = next === cpu ? -Infinity : Infinity;
+  function winningIndexes(player) {
+    var spots = emptySpots();
+    var wins = [];
     for (var i = 0; i < spots.length; i++) {
-      cells[spots[i]] = next;
-      var score = scoreMove(depth + 1, next);
+      cells[spots[i]] = player;
+      if (findWin(player)) wins.push(spots[i]);
       cells[spots[i]] = null;
-      if (next === cpu) {
-        if (score > best) best = score;
-      } else if (score < best) {
-        best = score;
-      }
     }
-    return best;
+    return wins;
   }
 
   function machineIndex() {
-    var spots = emptySpots();
-    var bestIndex = spots[0];
-    var bestScore = -Infinity;
-    for (var i = 0; i < spots.length; i++) {
-      cells[spots[i]] = cpu;
-      var score = scoreMove(0, cpu);
-      cells[spots[i]] = null;
-      if (score > bestScore) {
-        bestScore = score;
-        bestIndex = spots[i];
-      }
+    var wins = winningIndexes(cpu);
+    if (wins.length) return pickRandom(wins);
+
+    if (Math.random() < 0.35) {
+      var blocks = winningIndexes(human);
+      if (blocks.length) return pickRandom(blocks);
     }
-    return bestIndex;
+
+    return pickRandom(emptySpots());
   }
 
   function turnText() {

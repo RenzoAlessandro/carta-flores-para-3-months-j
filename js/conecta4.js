@@ -5,8 +5,6 @@
     renzo: { name: "Renzo", className: "disc--renzo" },
     jimena: { name: "Jimena", className: "disc--jimena" },
   };
-  var order = [3, 2, 4, 1, 5, 0, 6];
-
   var boardEl = document.getElementById("board");
   var statusEl = document.getElementById("game-status");
   var restartBtn = document.getElementById("restart");
@@ -93,119 +91,39 @@
     grid[row][col] = null;
   }
 
-  function windowScore(cells, machine) {
-    var mine = 0;
-    var opp = 0;
-    var empty = 0;
-    var rival = other(machine);
-    for (var i = 0; i < cells.length; i++) {
-      if (cells[i] === machine) mine++;
-      else if (cells[i] === rival) opp++;
-      else empty++;
-    }
-    if (mine === 4) return 100;
-    if (opp === 4) return -100;
-    if (mine === 3 && empty === 1) return 12;
-    if (opp === 3 && empty === 1) return -14;
-    if (mine === 2 && empty === 2) return 4;
-    if (opp === 2 && empty === 2) return -3;
-    return 0;
+  function pickRandom(list) {
+    return list[Math.floor(Math.random() * list.length)];
   }
 
-  function evaluate(machine) {
-    var score = 0;
-    var r;
-    var c;
-    for (r = 0; r < ROWS; r++) {
-      if (grid[r][3] === machine) score += 3;
-    }
-    for (r = 0; r < ROWS; r++) {
-      for (c = 0; c <= COLS - 4; c++) {
-        score += windowScore([grid[r][c], grid[r][c + 1], grid[r][c + 2], grid[r][c + 3]], machine);
-      }
-    }
-    for (c = 0; c < COLS; c++) {
-      for (r = 0; r <= ROWS - 4; r++) {
-        score += windowScore([grid[r][c], grid[r + 1][c], grid[r + 2][c], grid[r + 3][c]], machine);
-      }
-    }
-    for (r = 0; r <= ROWS - 4; r++) {
-      for (c = 0; c <= COLS - 4; c++) {
-        score += windowScore(
-          [grid[r][c], grid[r + 1][c + 1], grid[r + 2][c + 2], grid[r + 3][c + 3]],
-          machine
-        );
-      }
-    }
-    for (r = 0; r <= ROWS - 4; r++) {
-      for (c = 3; c < COLS; c++) {
-        score += windowScore(
-          [grid[r][c], grid[r + 1][c - 1], grid[r + 2][c - 2], grid[r + 3][c - 3]],
-          machine
-        );
-      }
-    }
-    return score;
-  }
-
-  function minimax(depth, maximizing, machine, alpha, beta, lastRow, lastCol) {
-    if (lastRow !== null) {
-      var who = grid[lastRow][lastCol];
-      if (winnerAt(lastRow, lastCol, who)) {
-        return who === machine ? 1000 + depth : -1000 - depth;
-      }
-    }
-    if (depth === 0 || isFull()) return evaluate(machine);
-
-    var player = maximizing ? machine : other(machine);
-    var best = maximizing ? -Infinity : Infinity;
-    for (var i = 0; i < order.length; i++) {
-      var row = drop(order[i], player);
+  function winningColumns(player) {
+    var cols = [];
+    for (var c = 0; c < COLS; c++) {
+      var row = drop(c, player);
       if (row < 0) continue;
-      var score = minimax(depth - 1, !maximizing, machine, alpha, beta, row, order[i]);
-      undo(row, order[i]);
-      if (maximizing) {
-        if (score > best) best = score;
-        if (score > alpha) alpha = score;
-      } else {
-        if (score < best) best = score;
-        if (score < beta) beta = score;
-      }
-      if (alpha >= beta) break;
+      if (winnerAt(row, c, player)) cols.push(c);
+      undo(row, c);
     }
-    return best;
+    return cols;
   }
 
-  function urgentColumn(player) {
-    for (var i = 0; i < order.length; i++) {
-      var row = drop(order[i], player);
-      if (row < 0) continue;
-      var win = winnerAt(row, order[i], player);
-      undo(row, order[i]);
-      if (win) return order[i];
+  function openColumns() {
+    var cols = [];
+    for (var c = 0; c < COLS; c++) {
+      if (lowestEmpty(c) >= 0) cols.push(c);
     }
-    return -1;
+    return cols;
   }
 
   function chooseColumn(machine) {
-    var winNow = urgentColumn(machine);
-    if (winNow >= 0) return winNow;
-    var block = urgentColumn(other(machine));
-    if (block >= 0) return block;
+    var wins = winningColumns(machine);
+    if (wins.length) return pickRandom(wins);
 
-    var bestCol = 3;
-    var best = -Infinity;
-    for (var i = 0; i < order.length; i++) {
-      var row = drop(order[i], machine);
-      if (row < 0) continue;
-      var score = minimax(3, false, machine, -Infinity, Infinity, row, order[i]);
-      undo(row, order[i]);
-      if (score > best) {
-        best = score;
-        bestCol = order[i];
-      }
+    if (Math.random() < 0.35) {
+      var blocks = winningColumns(other(machine));
+      if (blocks.length) return pickRandom(blocks);
     }
-    return bestCol;
+
+    return pickRandom(openColumns());
   }
 
   function turnText() {
